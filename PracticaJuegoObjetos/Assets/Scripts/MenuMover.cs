@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class MenuMover : IEstado
 {
+    [SerializeField]
+    private GameObject menuMover;
+
     public void Entrar(MenuStateMachine menus)
     {
         menus.menuMover.SetActive(true);

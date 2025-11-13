@@ -3,7 +3,7 @@ using UnityEngine;
 public class MenuCrear : IEstado
 {
     [SerializeField]
-    GameObject menuCrear;
+    private GameObject menuCrear;
 
     public void Entrar(MenuStateMachine menus)
     {
@@ -12,7 +12,7 @@ public class MenuCrear : IEstado
 
     public void Ejecutar(MenuStateMachine menus)
     {
-        OnClick();
+        
     }
 
     public void Salir(MenuStateMachine menus)
@@ -20,7 +20,15 @@ public class MenuCrear : IEstado
         menus.menuCrear.SetActive(false);
     }
 
-    void OnClick()
+    [SerializeField]
+    GameObject[] prefabsEdificios;
+
+    [SerializeField]
+    GameObject[] prefabsArboles;
+
+    [SerializeField]
+    GameObject[] prefabsDecoracion;
+    void CrearObjeto()
     {
         Debug.Log("Botón Crear Objeto pulsado");
     }

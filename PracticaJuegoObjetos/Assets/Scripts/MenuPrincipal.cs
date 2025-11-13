@@ -6,7 +6,7 @@ public class MenuPrincipal : IEstado
     GameObject[] botones;
 
     [SerializeField]
-    GameObject menuPrincipal;
+    private GameObject menuPrincipal;
         
     public void Entrar(MenuStateMachine menus)
     {
@@ -15,8 +15,7 @@ public class MenuPrincipal : IEstado
 
     public void Ejecutar(MenuStateMachine menus)
     {
-        ActivarBotones();
-        PulsarBoton();
+        
     }
 
     public void Salir(MenuStateMachine menus)
@@ -24,16 +23,5 @@ public class MenuPrincipal : IEstado
         menus.menuPrincipal.SetActive(false);
     }
 
-    public void ActivarBotones()
-    {
-        foreach (var boton in botones) // Recorre cada botón en el array
-        {
-            boton.SetActive(true);
-        }
-    }
-
-    public void PulsarBoton()
-    {
-        Debug.Log("Botón pulsado");
-    }
+    
 }
