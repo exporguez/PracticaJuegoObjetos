@@ -7,3 +7,4 @@ public interface  IEstado
     void Salir(MenuStateMachine menus);
 
 }
+ 

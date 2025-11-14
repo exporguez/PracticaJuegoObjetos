@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MenuStateMachine : MonoBehaviour
 {
-    // Menus que hay en el Menu Principal
+    // Menus que hay en la Pantalla Principal
     public GameObject menuPrincipal, menuCrear, menuMover, menuRotar, menuEliminar;
 
     // Estado actual del Menu
