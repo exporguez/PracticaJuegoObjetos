@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MenuStateMachine : MonoBehaviour
@@ -5,8 +6,13 @@ public class MenuStateMachine : MonoBehaviour
     // Menus que hay en la Pantalla Principal
     public GameObject menuPrincipal, menuCrear, menuMover, menuRotar, menuEliminar;
 
+    public GameObject[] prefabsEdificios;
+    public LayerMask sueloMask;
+    public LayerMask editableMask;
+
     // Estado actual del Menu
     private IEstado estadoAtualMenu;
+    private GameObject edificioSeleccionado;
 
     void Start()
     {
@@ -20,9 +26,9 @@ public class MenuStateMachine : MonoBehaviour
 
     void Update()
     {
-        if (estadoAtualMenu != null)
+        if (estadoAtualMenu != null)// Si hay un estado actual, ejecuta su lógica
         {
-            estadoAtualMenu.Ejecutar(this);
+            estadoAtualMenu.Ejecutar(this);// Ejecuta la lógica del estado actual
         }
     }
 
@@ -39,4 +45,41 @@ public class MenuStateMachine : MonoBehaviour
         // Entramos en el nuevo estado
         estadoAtualMenu.Entrar(this);
     }
+
+    public void VolverAlMenuPrincipal()// Vuelve al menú principal
+    {
+        CambiarEstado(new MenuPrincipal());
+    }
+    
+    public void IrMenuCrear()// Va al menú de crear
+    {
+        CambiarEstado(new MenuCrear());
+    }
+
+    public void IrMenuMover()// Va al menú de mover
+    {
+        CambiarEstado(new MenuMover());
+    }
+    
+    public void IrMenuRotar()// Va al menú de rotar
+    {
+        CambiarEstado(new MenuRotar());
+    }
+
+    public void IrMenuEliminar()// Va al menú de eliminar
+    {
+        CambiarEstado(new MenuEliminar());
+    }
+
+    public void SeleccionarEdificio(int indiceEdificio)// Selecciona el edificio a crear
+    {
+        if (indiceEdificio < 0 || indiceEdificio >= prefabsEdificios.Length) 
+        {
+            return;
+        }
+
+        edificioSeleccionado = prefabsEdificios[indiceEdificio];
+        //(new MenuCrear(prefabsEdificios, sueloMask));
+    }
 }
+
