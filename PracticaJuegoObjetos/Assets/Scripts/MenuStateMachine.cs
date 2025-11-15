@@ -12,17 +12,7 @@ public class MenuStateMachine : MonoBehaviour
 
     // Estado actual del Menu
     private IEstado estadoAtualMenu;
-    private GameObject edificioSeleccionado;
-
-    void Start()
-    {
-        // Inicializa el estado del menú al menú principal
-        menuPrincipal.SetActive(true);
-        menuCrear.SetActive(false);
-        menuMover.SetActive(false);
-        menuRotar.SetActive(false);
-        menuEliminar.SetActive(false);
-    }
+    private GameObject edificioSeleccionado;  
 
     void Update()
     {
@@ -79,7 +69,7 @@ public class MenuStateMachine : MonoBehaviour
         }
 
         edificioSeleccionado = prefabsEdificios[indiceEdificio];
-        //(new MenuCrear(prefabsEdificios, sueloMask));
+        
     }
 }
 
