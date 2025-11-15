@@ -12,10 +12,11 @@ public class ControlMenus : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) // Si ya existe una instancia, destruye esta
+        if (Instance != null && Instance != this)
         {            
             return;
-        }        
+        } 
+        Instance = this;
     }
 
     public void Start() // Inicializa el menú principal al inicio
