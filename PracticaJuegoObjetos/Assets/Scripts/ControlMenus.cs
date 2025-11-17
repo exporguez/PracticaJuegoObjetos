@@ -46,6 +46,12 @@ public class ControlMenus : MonoBehaviour
         botonVolverRotar.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());
         botonVolverEliminar.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());
 
+        for (int i = 0; i < botonesObjetos.Length; i++) // Asigna la funcion a los botones de objetos
+        {
+            int index = i; // Necesario para evitar el problema de cierre
+            botonesObjetos[i].onClick.AddListener(() => menuStateMachine.SeleccionarObjeto(index));
+        }
+
         CerrarMenus(); // Cierra todos los menús al inicio
         menuPrincipal.SetActive(true); // Abre el menú principal al inicio
     }

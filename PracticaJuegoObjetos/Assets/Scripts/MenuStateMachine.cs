@@ -5,15 +5,17 @@ public class MenuStateMachine : MonoBehaviour
 {
     public ControlMenus controlMenus;
 
-    public GameObject[] prefabsEdificios;
+    public GameObject[] prefabsObjetos;
     public LayerMask sueloMask;
     public LayerMask editableMask;
 
     // Estado actual del Menu
     private IEstado estadoAtualMenu;
-    private GameObject edificioSeleccionado;  
+    private GameObject edificioSeleccionado;
 
-    
+    public GameObject objetoSeleccionado;// Objeto actualmente seleccionado
+    public GameObject objetoMovimiento;// Objeto que se está moviendo
+    public bool enMovimiento = false;// Indica si un objeto está en movimiento
 
     public void Start()
     {
@@ -27,7 +29,7 @@ public class MenuStateMachine : MonoBehaviour
         if (estadoAtualMenu != null)// Si hay un estado actual, ejecuta su lógica
         {
             estadoAtualMenu.Ejecutar(this);// Ejecuta la lógica del estado actual
-        }
+        }        
     }
 
     public void CambiarEstado(IEstado nuevoEstado)
@@ -69,14 +71,14 @@ public class MenuStateMachine : MonoBehaviour
         CambiarEstado(new MenuEliminar());
     }
 
-    public void SeleccionarEdificio(int indiceEdificio)// Selecciona el edificio a crear
+    public void SeleccionarObjeto(int indiceObjeto)// Selecciona el edificio a crear
     {
-        if (indiceEdificio < 0 || indiceEdificio >= prefabsEdificios.Length) 
+        if (indiceObjeto < 0 || indiceObjeto >= prefabsObjetos.Length) 
         {
             return;
         }
-
-        edificioSeleccionado = prefabsEdificios[indiceEdificio];
+        objetoMovimiento = Instantiate(prefabsObjetos[indiceObjeto]);
+        enMovimiento = true;
         
     }
 }

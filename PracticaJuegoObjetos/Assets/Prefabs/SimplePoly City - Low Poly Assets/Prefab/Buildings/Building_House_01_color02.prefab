@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7704041626035296748}
   m_Layer: 7
   m_Name: Building_House_01_color02
-  m_TagString: Edtibale
+  m_TagString: Editable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
