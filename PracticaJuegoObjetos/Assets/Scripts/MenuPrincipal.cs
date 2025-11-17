@@ -5,12 +5,11 @@ public class MenuPrincipal : IEstado
     [SerializeField]
     GameObject[] botones;
 
-    [SerializeField]
-    private GameObject menuPrincipal;
         
     public void Entrar(MenuStateMachine menus)
     {
-        menus.menuPrincipal.SetActive(true);
+        menus.controlMenus.CerrarMenus();
+        menus.controlMenus.menuPrincipal.SetActive(true);
     }
 
     public void Ejecutar(MenuStateMachine menus)
@@ -20,7 +19,7 @@ public class MenuPrincipal : IEstado
 
     public void Salir(MenuStateMachine menus)
     {
-        menus.menuPrincipal.SetActive(false);
+        menus.controlMenus.menuPrincipal.SetActive(false);
     }
 
     

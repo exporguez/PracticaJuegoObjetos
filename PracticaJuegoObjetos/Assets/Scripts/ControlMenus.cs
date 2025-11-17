@@ -16,7 +16,11 @@ public class ControlMenus : MonoBehaviour
     public Button botonMover;
     public Button botonRotar;
     public Button botonEliminar;
-    public Button botonVolver;
+
+    public Button botonVolverCrear;
+    public Button botonVolverMover;
+    public Button botonVolverRotar;
+    public Button botonVolverEliminar;
 
     private void Awake()
     {
@@ -28,58 +32,28 @@ public class ControlMenus : MonoBehaviour
     }
 
     public void Start() // Inicializa el menú principal al inicio
-    {
-        menuPrincipal.SetActive(true);
-        menuCrear.SetActive(false);
-        menuMover.SetActive(false);
-        menuRotar.SetActive(false);
-        menuEliminar.SetActive(false);
+    {        
 
         botonCrear.onClick.AddListener(() => menuStateMachine.IrMenuCrear());// Asigna la funcion al botón Crear
         botonMover.onClick.AddListener(() => menuStateMachine.IrMenuMover());// Asigna la funcion al botón Mover
         botonRotar.onClick.AddListener(() => menuStateMachine.IrMenuRotar());// Asigna la funcion al botón Rotar
         botonEliminar.onClick.AddListener(() => menuStateMachine.IrMenuEliminar());// Asigna la funcion al botón Eliminar
-        botonVolver.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());// Asigna la funcion al botón Volver
+        
+        botonVolverCrear.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());// Asigna la funcion al botón Volver
+        botonVolverMover.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());
+        botonVolverRotar.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());
+        botonVolverEliminar.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());
 
+        CerrarMenus(); // Cierra todos los menús al inicio
+        menuPrincipal.SetActive(true); // Abre el menú principal al inicio
     }
 
-    public void IrMenuCrear()
+    public void CerrarMenus() // Cierra todos los menús
     {
-        CerrarMenus();
-        menuCrear.SetActive(true);
-    }
-
-    public void IrMenuMover()
-    {
-        CerrarMenus();
-        menuMover.SetActive(true);
-    }
-
-    public void IrMenuRotar()
-    {
-        CerrarMenus();
-        menuRotar.SetActive(true);
-    }
-
-    public void IrMenuEliminar()
-    {
-        CerrarMenus();
-        menuEliminar.SetActive(true);
-
-    }
-
-    public void VolverAlMenuPrincipal()
-    {
-        CerrarMenus();
-        menuPrincipal.SetActive(true);
-    }
-
-    public void CerrarMenus()
-    {
+        menuPrincipal.SetActive(false);
         menuCrear.SetActive(false);
         menuMover.SetActive(false);
         menuRotar.SetActive(false);
         menuEliminar.SetActive(false);
-        menuPrincipal.SetActive(false);
     }
 }

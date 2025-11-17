@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class MenuStateMachine : MonoBehaviour
 {
-    // Menus que hay en la Pantalla Principal
-    public GameObject menuPrincipal, menuCrear, menuMover, menuRotar, menuEliminar;
+    public ControlMenus controlMenus;
 
     public GameObject[] prefabsEdificios;
     public LayerMask sueloMask;
@@ -14,7 +13,7 @@ public class MenuStateMachine : MonoBehaviour
     private IEstado estadoAtualMenu;
     private GameObject edificioSeleccionado;  
 
-     public ControlMenus controlMenus;
+    
 
     public void Start()
     {
@@ -47,32 +46,27 @@ public class MenuStateMachine : MonoBehaviour
 
     public void VolverAlMenuPrincipal()// Vuelve al menú principal
     {
-        controlMenus.CerrarMenus();
-        controlMenus.menuPrincipal.SetActive(true);
+        CambiarEstado(new MenuPrincipal());
     }
     
     public void IrMenuCrear()// Va al menú de crear
     {
-        controlMenus.CerrarMenus();
-        controlMenus.menuCrear.SetActive(true);
+        CambiarEstado(new MenuCrear());
     }
 
     public void IrMenuMover()// Va al menú de mover
     {
-        controlMenus.CerrarMenus();
-        controlMenus.menuMover.SetActive(true);
+        CambiarEstado(new MenuMover());
     }
     
     public void IrMenuRotar()// Va al menú de rotar
     {
-        controlMenus.CerrarMenus();
-        controlMenus.menuRotar.SetActive(true);
+        CambiarEstado(new MenuRotar());
     }
 
     public void IrMenuEliminar()// Va al menú de eliminar
     {
-        controlMenus.CerrarMenus();
-        controlMenus.menuEliminar.SetActive(true);
+        CambiarEstado(new MenuEliminar());
     }
 
     public void SeleccionarEdificio(int indiceEdificio)// Selecciona el edificio a crear
