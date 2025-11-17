@@ -12,6 +12,8 @@ public class ControlMenus : MonoBehaviour
     public GameObject menuRotar;
     public GameObject menuEliminar;
 
+    public Button[] botonesObjetos;
+
     public Button botonCrear;
     public Button botonMover;
     public Button botonRotar;
@@ -55,5 +57,6 @@ public class ControlMenus : MonoBehaviour
         menuMover.SetActive(false);
         menuRotar.SetActive(false);
         menuEliminar.SetActive(false);
+        
     }
 }
