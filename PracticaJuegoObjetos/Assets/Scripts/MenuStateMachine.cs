@@ -14,6 +14,15 @@ public class MenuStateMachine : MonoBehaviour
     private IEstado estadoAtualMenu;
     private GameObject edificioSeleccionado;  
 
+     public ControlMenus controlMenus;
+
+    public void Start()
+    {
+        // Inicializa el estado del menú al menú principal
+        VolverAlMenuPrincipal();
+    }
+
+
     void Update()
     {
         if (estadoAtualMenu != null)// Si hay un estado actual, ejecuta su lógica
@@ -38,27 +47,32 @@ public class MenuStateMachine : MonoBehaviour
 
     public void VolverAlMenuPrincipal()// Vuelve al menú principal
     {
-        CambiarEstado(new MenuPrincipal());
+        controlMenus.CerrarMenus();
+        controlMenus.menuPrincipal.SetActive(true);
     }
     
     public void IrMenuCrear()// Va al menú de crear
     {
-        CambiarEstado(new MenuCrear());
+        controlMenus.CerrarMenus();
+        controlMenus.menuCrear.SetActive(true);
     }
 
     public void IrMenuMover()// Va al menú de mover
     {
-        CambiarEstado(new MenuMover());
+        controlMenus.CerrarMenus();
+        controlMenus.menuMover.SetActive(true);
     }
     
     public void IrMenuRotar()// Va al menú de rotar
     {
-        CambiarEstado(new MenuRotar());
+        controlMenus.CerrarMenus();
+        controlMenus.menuRotar.SetActive(true);
     }
 
     public void IrMenuEliminar()// Va al menú de eliminar
     {
-        CambiarEstado(new MenuEliminar());
+        controlMenus.CerrarMenus();
+        controlMenus.menuEliminar.SetActive(true);
     }
 
     public void SeleccionarEdificio(int indiceEdificio)// Selecciona el edificio a crear

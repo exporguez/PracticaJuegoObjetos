@@ -5,33 +5,49 @@ public class MenuMover : IEstado
     private MenuStateMachine menus;
     private string tagEditable = "Editable";
 
+    private GameObject objetoSeleccionado;
+    private float distanciaMaxima = 100f;
+
     public void Entrar(MenuStateMachine menus)
     {
-        menus.menuMover.SetActive(true);
+        menus.controlMenus.CerrarMenus();
+        menus.controlMenus.menuMover.SetActive(true);
+        objetoSeleccionado = null;// No hay ningún objeto seleccionado al entrar
     }
 
     public void Ejecutar(MenuStateMachine menus)
     {
-        if (Camera.main != null) return; // Si no hay una cámara principal, no hacer nada
-        if (menus == null) return; // Si no hay un menú, no hacer nada
+        if (Camera.main == null) return; // Si no hay una cámara principal, no hacer nada        
 
-        if(Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Crea un rayo desde la cámara hacia la posición del ratón
-            
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f)) // Si el rayo colisiona con un objeto editable
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Crea un rayo desde la cámara hacia la posición del ratón
+        
+        if (objetoSeleccionado == null && Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo y no hay ningún objeto seleccionado
+        {                   
+            if (Physics.Raycast(ray, out RaycastHit hit, distanciaMaxima)) // Si el rayo colisiona con un objeto editable
             {
                 if (hit.collider.CompareTag(tagEditable)) // Verifica si el objeto tiene la etiqueta "Editable"
                 {
-                    GameObject objetoSeleccionado = hit.collider.gameObject; // Obtiene el objeto seleccionado
-                    objetoSeleccionado.transform.position = hit.point; // Mueve el objeto a la nueva posición                   
+                    objetoSeleccionado = hit.collider.gameObject; // Obtiene el objeto seleccionado                                   
                 }
             }                                                                
+        }
+
+        if (objetoSeleccionado != null)
+        {                      
+            if (Physics.Raycast(ray, out RaycastHit hit, distanciaMaxima, menus.sueloMask)) // Si el rayo colisiona con el suelo
+            {
+                objetoSeleccionado.transform.position = hit.point; // Mueve el objeto seleccionado a la posición del ratón en el suelo
+            }
+
+            if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
+            {
+                objetoSeleccionado = null;// Deselecciona el objeto
+            }
         }
     }
 
     public void Salir(MenuStateMachine menus)
     {
-        menus.menuMover.SetActive(false);
+        menus.controlMenus.menuMover.SetActive(false);
     }
 }
