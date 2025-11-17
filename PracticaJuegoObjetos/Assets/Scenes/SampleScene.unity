@@ -5183,7 +5183,6 @@ GameObject:
   - component: {fileID: 1553930879}
   - component: {fileID: 1553930878}
   - component: {fileID: 1553930877}
-  - component: {fileID: 1553930881}
   m_Layer: 6
   m_Name: Plane
   m_TagString: Suelo
@@ -5281,28 +5280,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1333299450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1553930881
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553930876}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1568429920 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3094549504024004975, guid: 34bd0e0e7ce059e4395b306f4f5e6643, type: 3}
@@ -6202,6 +6179,9 @@ MonoBehaviour:
   editableMask:
     serializedVersion: 2
     m_Bits: 128
+  objetoSeleccionado: {fileID: 0}
+  objetoMovimiento: {fileID: 0}
+  enMovimiento: 0
 --- !u!4 &1817937165
 Transform:
   m_ObjectHideFlags: 0
