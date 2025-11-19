@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class MenuMover : IEstado
 {
-    private MenuStateMachine menus;
-    private string tagEditable = "Editable";
+    private float distanciaMaxima = 200f;// Distancia máxima del rayo
+    private GameObject objetoSeleccionado;// Objeto que ha sido seleccionado para mover
+    private string tagEditable = "Editable";// Etiqueta para los objetos que se pueden mover
+    private LayerMask sueloMask = LayerMask.GetMask("Suelo");// Capa del suelo
 
-    private GameObject objetoSeleccionado;
-    private float distanciaMaxima = 100f;
 
     public void Entrar(MenuStateMachine menus)
     {
@@ -17,32 +17,41 @@ public class MenuMover : IEstado
 
     public void Ejecutar(MenuStateMachine menus)
     {
-        if (Camera.main == null) return; // Si no hay una cámara principal, no hacer nada        
+        if (Camera.main == null) return; // Si no hay una cámara principal, no hacer nada
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Crea un rayo desde la cámara hacia la posición del ratón
-        RaycastHit hit;// Variable para almacenar la información del rayo
+        if (objetoSeleccionado != null) // Si se hace clic izquierdo y no hay ningún objeto seleccionado
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Crea un rayo desde la cámara hacia la posición del ratón
+            RaycastHit hit;// Variable para almacenar la información del rayo
 
-        if (objetoSeleccionado == null && Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo y no hay ningún objeto seleccionado
-        {                   
-            if (Physics.Raycast(ray, out hit, distanciaMaxima)) // Si el rayo colisiona con un objeto editable
+            if (Physics.Raycast(ray, out hit, distanciaMaxima, sueloMask)) // Si el rayo colisiona con un objeto editable
             {
-                if (hit.collider.CompareTag(tagEditable)) // Verifica si el objeto tiene la etiqueta "Editable"
-                {
-                    objetoSeleccionado = hit.collider.gameObject; // Obtiene el objeto seleccionado                                   
-                }
-            }                                                                
-        }
-
-        if (objetoSeleccionado != null)
-        {                      
-            if (Physics.Raycast(ray, out hit, distanciaMaxima, menus.sueloMask)) // Si el rayo colisiona con el suelo
-            {
-                objetoSeleccionado.transform.position = hit.point; // Mueve el objeto seleccionado a la posición del ratón en el suelo
+                Vector3 nuevaPosicion = hit.point; // Obtiene la posición del punto de colisión
+                nuevaPosicion.y += objetoSeleccionado.transform.localScale.y / 2f; // Ajusta la posición Y para que el objeto quede sobre el suelo
+                objetoSeleccionado.transform.position = nuevaPosicion; // Mueve el objeto seleccionado a la nueva posición
             }
 
             if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
             {
-                objetoSeleccionado = null;// Deselecciona el objeto
+                objetoSeleccionado.layer = LayerMask.NameToLayer("Default"); // Restaura la capa del objeto seleccionado
+                objetoSeleccionado = null; // Deselecciona el objeto al hacer clic izquierdo
+            }
+            return; // Sale del método para evitar seleccionar otro objeto mientras se mueve uno
+        }
+
+
+        if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Crea un rayo desde la cámara hacia la posición del ratón
+            RaycastHit hit;// Variable para almacenar la información del rayo
+            
+            if (Physics.Raycast(ray, out hit, distanciaMaxima)) // Si el rayo colisiona con un objeto editable
+            {
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Default")) // Si el objeto tiene la etiqueta "Editable"
+                {
+                    objetoSeleccionado = hit.collider.gameObject; // Selecciona el objeto
+                    objetoSeleccionado.layer = LayerMask.NameToLayer("Ignore Raycast"); // Cambia la capa del objeto para ignorar futuros rayos
+                }
             }
         }
     }

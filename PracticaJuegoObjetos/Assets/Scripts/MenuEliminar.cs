@@ -4,6 +4,8 @@ public class MenuEliminar : IEstado
 {
     private MenuStateMachine menus;
     private string tagEditable = "Editable";
+    private string tagNoEditable = "Default";
+    private float distanciaMaxima = 200f;// Distancia máxima del rayo
 
 
     public void Entrar(MenuStateMachine menus)
@@ -24,7 +26,7 @@ public class MenuEliminar : IEstado
         {           
             if (Physics.Raycast(ray, out hit, 100f)) // Si el rayo colisiona con un objeto editable
             {
-                if (hit.collider.CompareTag(tagEditable)) // Verifica si el objeto tiene la etiqueta "Editable"
+                if (hit.collider.CompareTag(tagNoEditable)) // Verifica si el objeto tiene la etiqueta "Default"
                 {
                     GameObject objetoEliminar = hit.collider.gameObject;// Obtiene el objeto seleccionado
                     Object.Destroy(objetoEliminar); // Obtiene el objeto seleccionado                    

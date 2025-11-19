@@ -54,7 +54,7 @@ public class ControlMenus : MonoBehaviour
         for (int i = 0; i < botonesPrefabs.Length; i++) // Asigna la funcion a los botones de objetos
         {
             int index = i; // Necesario para evitar el problema de cierre
-            botonesPrefabs[i].onClick.AddListener(() => SeleccionarObjeto(index));
+            botonesPrefabs[i].onClick.AddListener(() => CrearObjeto(index));
         }
 
         CerrarMenus(); // Cierra todos los menús al inicio
@@ -70,7 +70,7 @@ public class ControlMenus : MonoBehaviour
         menuEliminar.SetActive(false);
         
     }
-    public void SeleccionarObjeto(int indiceObjeto)
+    public void CrearObjeto(int indiceObjeto)
     {
         if (objetoCreado != null)
         {
@@ -94,6 +94,7 @@ public class ControlMenus : MonoBehaviour
         if (suelo != null)
         {            
             objetoCreado.transform.position = posicionInicial;
+            objetoCreado.layer = LayerMask.NameToLayer("Default"); // Cambia la capa del edificio para que sea editable
         }
     }
 

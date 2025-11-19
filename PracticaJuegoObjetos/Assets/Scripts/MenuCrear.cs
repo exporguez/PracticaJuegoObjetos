@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MenuCrear : IEstado
 {  
-    private float distanciaMaxima = 100f;// Distancia máxima del rayo
+    private float distanciaMaxima = 200f;// Distancia máxima del rayo
     public ControlMenus controlMenus;// Referencia al controlador de menús
     private GameObject objetoCreado;// Objeto que se está moviendo
     //private bool enMovimiento = false;// Indica si un objeto está en movimiento
@@ -23,13 +23,17 @@ public class MenuCrear : IEstado
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);// Crea un rayo desde la cámara hacia la posición del ratón
         RaycastHit hit;// Variable para almacenar la información del punto de colisión
+        Debug.DrawRay(ray.origin, ray.direction * distanciaMaxima, Color.red, 0.1f);
 
         if (Physics.Raycast(ray, out hit, distanciaMaxima, menus.sueloMask))// Si el rayo colisiona con el suelo
         {
             Vector3 nuevaPosicion = hit.point;// Obtiene la posición del punto de colisión
             nuevaPosicion.y += objetoCreado.transform.localScale.y / 2f; // Ajusta la posición Y para que el edificio quede sobre el suelo
             objetoCreado.transform.position = nuevaPosicion;// Mueve el edificio a la nueva posición
+            
         }
+        
+
 
         if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
         {
