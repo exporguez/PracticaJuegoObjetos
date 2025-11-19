@@ -4,15 +4,18 @@ using UnityEngine.UI;
 public class ControlMenus : MonoBehaviour
 {
     public static ControlMenus Instance { get; private set; }
+    public MenuCrear menuCrearScript;
 
-    public MenuStateMachine menuStateMachine;
+    public MenuStateMachine menus;
     public GameObject menuPrincipal;
     public GameObject menuCrear;
     public GameObject menuMover;
     public GameObject menuRotar;
     public GameObject menuEliminar;
 
-    public Button[] botonesObjetos;
+    public GameObject[] prefabs;
+    public Button[] botonesPrefabs;
+    private GameObject objetoCreado;
 
     public Button botonCrear;
     public Button botonMover;
@@ -24,10 +27,12 @@ public class ControlMenus : MonoBehaviour
     public Button botonVolverRotar;
     public Button botonVolverEliminar;
 
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {            
+            Destroy(gameObject);
             return;
         } 
         Instance = this;
@@ -36,20 +41,20 @@ public class ControlMenus : MonoBehaviour
     public void Start() // Inicializa el menú principal al inicio
     {        
 
-        botonCrear.onClick.AddListener(() => menuStateMachine.IrMenuCrear());// Asigna la funcion al botón Crear
-        botonMover.onClick.AddListener(() => menuStateMachine.IrMenuMover());// Asigna la funcion al botón Mover
-        botonRotar.onClick.AddListener(() => menuStateMachine.IrMenuRotar());// Asigna la funcion al botón Rotar
-        botonEliminar.onClick.AddListener(() => menuStateMachine.IrMenuEliminar());// Asigna la funcion al botón Eliminar
+        botonCrear.onClick.AddListener(() => menus.IrMenuCrear());// Asigna la funcion al botón Crear
+        botonMover.onClick.AddListener(() => menus.IrMenuMover());// Asigna la funcion al botón Mover
+        botonRotar.onClick.AddListener(() => menus.IrMenuRotar());// Asigna la funcion al botón Rotar
+        botonEliminar.onClick.AddListener(() => menus.IrMenuEliminar());// Asigna la funcion al botón Eliminar
         
-        botonVolverCrear.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());// Asigna la funcion al botón Volver
-        botonVolverMover.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());
-        botonVolverRotar.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());
-        botonVolverEliminar.onClick.AddListener(() => menuStateMachine.VolverAlMenuPrincipal());
+        botonVolverCrear.onClick.AddListener(() => menus.VolverAlMenuPrincipal());// Asigna la funcion al botón Volver
+        botonVolverMover.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
+        botonVolverRotar.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
+        botonVolverEliminar.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
 
-        for (int i = 0; i < botonesObjetos.Length; i++) // Asigna la funcion a los botones de objetos
+        for (int i = 0; i < botonesPrefabs.Length; i++) // Asigna la funcion a los botones de objetos
         {
             int index = i; // Necesario para evitar el problema de cierre
-            botonesObjetos[i].onClick.AddListener(() => menuStateMachine.SeleccionarObjeto(index));
+            botonesPrefabs[i].onClick.AddListener(() => SeleccionarObjeto(index));
         }
 
         CerrarMenus(); // Cierra todos los menús al inicio
@@ -65,4 +70,31 @@ public class ControlMenus : MonoBehaviour
         menuEliminar.SetActive(false);
         
     }
+    public void SeleccionarObjeto(int indiceObjeto)
+    {
+        if (objetoCreado != null)
+        {
+            Object.Destroy(objetoCreado); // Destruye el edificio creado previamente si existe
+        }
+
+        if (Camera.main == null) return;
+
+        if (indiceObjeto < 0 || indiceObjeto >= prefabs.Length)
+        {
+            return;
+        }
+        
+        GameObject prefabInstanciado = menus.controlMenus.prefabs[indiceObjeto];
+        objetoCreado = Object.Instantiate(prefabInstanciado);
+        objetoCreado.layer = LayerMask.NameToLayer("Editable"); // Cambia la capa del edificio para que sea editable
+
+        GameObject suelo = GameObject.FindWithTag("Suelo");
+        Vector3 posicionInicial = new Vector3(0f, 2f, 77.5f); // Posición por defecto en caso de no encontrar el suelo
+
+        if (suelo != null)
+        {            
+            objetoCreado.transform.position = posicionInicial;
+        }
+    }
+
 }

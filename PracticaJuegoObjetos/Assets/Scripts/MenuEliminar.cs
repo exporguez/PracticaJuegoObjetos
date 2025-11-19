@@ -22,7 +22,6 @@ public class MenuEliminar : IEstado
 
         if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
         {           
-
             if (Physics.Raycast(ray, out hit, 100f)) // Si el rayo colisiona con un objeto editable
             {
                 if (hit.collider.CompareTag(tagEditable)) // Verifica si el objeto tiene la etiqueta "Editable"

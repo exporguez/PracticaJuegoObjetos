@@ -11,12 +11,8 @@ public class MenuStateMachine : MonoBehaviour
 
     // Estado actual del Menu
     private IEstado estadoAtualMenu;
-    private GameObject edificioSeleccionado;
-
-    public GameObject objetoSeleccionado;// Objeto actualmente seleccionado
-    public GameObject objetoMovimiento;// Objeto que se está moviendo
-    public bool enMovimiento = false;// Indica si un objeto está en movimiento
-
+    private GameObject edificioSeleccionado;    
+    
     public void Start()
     {
         // Inicializa el estado del menú al menú principal
@@ -26,6 +22,7 @@ public class MenuStateMachine : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Estado actual del menú ejecutandose");
         if (estadoAtualMenu != null)// Si hay un estado actual, ejecuta su lógica
         {
             estadoAtualMenu.Ejecutar(this);// Ejecuta la lógica del estado actual
@@ -53,7 +50,8 @@ public class MenuStateMachine : MonoBehaviour
     
     public void IrMenuCrear()// Va al menú de crear
     {
-        CambiarEstado(new MenuCrear());
+        estadoAtualMenu = new MenuCrear();
+        estadoAtualMenu.Entrar(this);
     }
 
     public void IrMenuMover()// Va al menú de mover
@@ -71,15 +69,6 @@ public class MenuStateMachine : MonoBehaviour
         CambiarEstado(new MenuEliminar());
     }
 
-    public void SeleccionarObjeto(int indiceObjeto)// Selecciona el edificio a crear
-    {
-        if (indiceObjeto < 0 || indiceObjeto >= prefabsObjetos.Length) 
-        {
-            return;
-        }
-        objetoMovimiento = Instantiate(prefabsObjetos[indiceObjeto]);
-        enMovimiento = true;
-        
-    }
+    
 }
 
