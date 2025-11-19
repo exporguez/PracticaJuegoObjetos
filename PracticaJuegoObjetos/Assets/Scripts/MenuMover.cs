@@ -28,6 +28,7 @@ public class MenuMover : IEstado
 
             if (Physics.Raycast(ray, out hit, distanciaMaxima, sueloMask)) // Si el rayo colisiona con un objeto editable
             {
+                menus.MoverSombra(hit.point);
                 Vector3 nuevaPosicion = hit.point; // Obtiene la posición del punto de colisión
                 nuevaPosicion.y += objetoSeleccionado.transform.localScale.y / 2f; // Ajusta la posición Y para que el objeto quede sobre el suelo
                 objetoSeleccionado.transform.position = nuevaPosicion; // Mueve el objeto seleccionado a la nueva posición
@@ -35,6 +36,7 @@ public class MenuMover : IEstado
 
             if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
             {
+                menus.DestruirSombra();
                 LeanTween.scale(objetoSeleccionado, Vector3.one, duracionAnimacion).setEase(LeanTweenType.easeOutBack); // Anima la escala del objeto de vuelta a su tamaño original
 
                 objetoSeleccionado.layer = LayerMask.NameToLayer("Default"); // Restaura la capa del objeto seleccionado
@@ -56,6 +58,8 @@ public class MenuMover : IEstado
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Default")) // Si el objeto tiene la etiqueta "Editable"
                 {
                     objetoSeleccionado = hit.collider.gameObject; // Selecciona el objeto
+                    float escalaObjeto = objetoSeleccionado.transform.localScale.x;
+                    menus.CrearSombra(hit.point, escalaObjeto);
                     LeanTween.scale(objetoSeleccionado, escalaReducida, duracionAnimacion).setEase(LeanTweenType.easeOutQuad); // Anima la escala del objeto seleccionado a una escala reducida
                     objetoSeleccionado.layer = LayerMask.NameToLayer("Ignore Raycast"); // Cambia la capa del objeto para ignorar futuros rayos
                 }
@@ -65,6 +69,7 @@ public class MenuMover : IEstado
 
     public void Salir(MenuStateMachine menus)
     {
+        menus.DestruirSombra();
 
         if (objetoSeleccionado != null)
         {

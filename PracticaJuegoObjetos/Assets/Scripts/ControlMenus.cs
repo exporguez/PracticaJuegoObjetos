@@ -12,16 +12,21 @@ public class ControlMenus : MonoBehaviour
     public GameObject menuMover;
     public GameObject menuRotar;
     public GameObject menuEliminar;
+    public GameObject menuEscalar;
 
+    
     public GameObject popUpCrear;
     public GameObject popUpMover;
     public GameObject popUpRotar;
     public GameObject popUpEliminar;
+    public GameObject menuLateralCrear;
 
     public Button botonCerrarPopUpCrear;
     public Button botonCerrarPopUpMover;
     public Button botonCerrarPopUpRotar;
     public Button botonCerrarPopUpEliminar;
+
+    public Button botonCerrarMenuLateral;
 
     public GameObject[] prefabs;
     public Button[] botonesPrefabs;
@@ -31,6 +36,7 @@ public class ControlMenus : MonoBehaviour
     public Button botonMover;
     public Button botonRotar;
     public Button botonEliminar;
+    public Button botonEscalar;
 
     public Button botonVolverCrear;
     public Button botonVolverMover;
@@ -65,6 +71,8 @@ public class ControlMenus : MonoBehaviour
         botonCerrarPopUpMover.onClick.AddListener(() => CerrarPopUpMover());// Asigna la funcion al botón Cerrar del pop-up Mover
         botonCerrarPopUpRotar.onClick.AddListener(() => CerrarPopUpRotar());// Asigna la funcion al botón Cerrar del pop-up Rotar
         botonCerrarPopUpEliminar.onClick.AddListener(() => CerrarPopUpEliminar());// Asigna la funcion al botón Cerrar del pop-up Eliminar
+
+        botonCerrarMenuLateral.onClick.AddListener(() => CerrarPopUpMenuLateral());// Asigna la funcion al botón Cerrar del menú lateral
 
         for (int i = 0; i < botonesPrefabs.Length; i++) // Asigna la funcion a los botones de objetos
         {
@@ -105,14 +113,15 @@ public class ControlMenus : MonoBehaviour
         menus.AnimarSalidaPopUps(popUpEliminar);
         
     }
-
+    
+    public void CerrarPopUpMenuLateral()
+    {
+        menus.AnimarSalidaMenuCrear(menuCrear);
+    }    
 
     public void CrearObjeto(int indiceObjeto)
     {
-        if (objetoCreado != null)
-        {
-            Object.Destroy(objetoCreado); // Destruye el edificio creado previamente si existe
-        }
+        
 
         if (Camera.main == null) return;
 

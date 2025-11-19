@@ -8,13 +8,16 @@ public class MenuCrear : IEstado
     private GameObject objetoCreado;// Objeto que se está moviendo
     //private bool enMovimiento = false;// Indica si un objeto está en movimiento
     public MenuStateMachine menus;
+   
     public void Entrar(MenuStateMachine menus)// Al entrar en el estado de crear edificio
     {
         menus.controlMenus.CerrarMenus();
+        
         menus.AnimarEntradaPopUps(menus.controlMenus.popUpCrear);
+        menus.AnimarEntradaMenuCrear(menus.controlMenus.menuLateralCrear);
         menus.controlMenus.menuCrear.SetActive(true);
         objetoCreado = null; // No hay ningún edificio creado al entrar
-        //enMovimiento = false;
+       
         
     }
 
