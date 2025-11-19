@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1933308284265810746}
   m_Layer: 7
   m_Name: Building_Residential_color03
-  m_TagString: Edtibale
+  m_TagString: Editable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

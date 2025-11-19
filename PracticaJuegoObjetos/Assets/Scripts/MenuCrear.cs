@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MenuCrear : IEstado
 {  
-    private float distanciaMaxima = 200f;// Distancia máxima del rayo
+    private float distanciaMaxima = 300f;// Distancia máxima del rayo
     public ControlMenus controlMenus;// Referencia al controlador de menús
     private GameObject objetoCreado;// Objeto que se está moviendo
     //private bool enMovimiento = false;// Indica si un objeto está en movimiento

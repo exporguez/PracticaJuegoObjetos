@@ -4,8 +4,8 @@ public class MenuRotar : IEstado
 {
     private GameObject objetoSeleccionado;
     private string tagEditable = "Editable";
-    private float velocidadRotacion = 100f;
-    private float distanciaMaxima = 100f;
+    private float velocidadRotacion = 500f;
+    private float distanciaMaxima = 300f;
 
     public void Entrar(MenuStateMachine menus)
     {
@@ -37,7 +37,7 @@ public class MenuRotar : IEstado
             float rotX = Input.GetAxis("Mouse X") * velocidadRotacion * Time.deltaTime; // Obtiene la rotación en el eje X basada en el movimiento del ratón
             objetoSeleccionado.transform.Rotate(0f, -rotX, 0f); // Rota el objeto alrededor del eje Y (arriba) en el espacio mundial
 
-            if (Input.GetMouseButtonDown(0))// Si se hace clic izquierdo
+            if (Input.GetMouseButtonDown(1))// Si se hace clic derecho
             {
                 objetoSeleccionado = null; // Deselecciona el objeto al hacer clic izquierdo
             }

@@ -8,6 +8,7 @@ public class MenuStateMachine : MonoBehaviour
     public GameObject[] prefabsObjetos;
     public LayerMask sueloMask;
     public LayerMask editableMask;
+    public LayerMask capaDestruibleMask;
 
     // Estado actual del Menu
     private IEstado estadoAtualMenu;

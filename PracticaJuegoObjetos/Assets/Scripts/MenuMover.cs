@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MenuMover : IEstado
 {
-    private float distanciaMaxima = 200f;// Distancia máxima del rayo
+    private float distanciaMaxima = 300f;// Distancia máxima del rayo
     private GameObject objetoSeleccionado;// Objeto que ha sido seleccionado para mover
     private string tagEditable = "Editable";// Etiqueta para los objetos que se pueden mover
     private LayerMask sueloMask = LayerMask.GetMask("Suelo");// Capa del suelo
