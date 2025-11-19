@@ -7,11 +7,12 @@ public class MenuMover : IEstado
     private string tagEditable = "Editable";// Etiqueta para los objetos que se pueden mover
     private LayerMask sueloMask = LayerMask.GetMask("Suelo");// Capa del suelo
 
-
+    private Vector3 escalaReducida = new Vector3(0.7f, 0.7f, 0.7f);// Escala reducida para el objeto seleccionado
+    private float duracionAnimacion = 0.2f;// Duración de la animación de reducción
     public void Entrar(MenuStateMachine menus)
     {
         menus.controlMenus.CerrarMenus();
-        menus.AnimarPopUps(menus.controlMenus.popUpMover);
+        menus.AnimarEntradaPopUps(menus.controlMenus.popUpMover);
         menus.controlMenus.menuMover.SetActive(true);
         objetoSeleccionado = null;// No hay ningún objeto seleccionado al entrar
     }
@@ -34,6 +35,8 @@ public class MenuMover : IEstado
 
             if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
             {
+                LeanTween.scale(objetoSeleccionado, Vector3.one, duracionAnimacion).setEase(LeanTweenType.easeOutBack); // Anima la escala del objeto de vuelta a su tamaño original
+
                 objetoSeleccionado.layer = LayerMask.NameToLayer("Default"); // Restaura la capa del objeto seleccionado
                 menus.InstanciarParticulas(objetoSeleccionado.transform.position); // Instancia partículas en la posición donde se colocó el objeto
                 objetoSeleccionado = null; // Deselecciona el objeto al hacer clic izquierdo
@@ -53,6 +56,7 @@ public class MenuMover : IEstado
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Default")) // Si el objeto tiene la etiqueta "Editable"
                 {
                     objetoSeleccionado = hit.collider.gameObject; // Selecciona el objeto
+                    LeanTween.scale(objetoSeleccionado, escalaReducida, duracionAnimacion).setEase(LeanTweenType.easeOutQuad); // Anima la escala del objeto seleccionado a una escala reducida
                     objetoSeleccionado.layer = LayerMask.NameToLayer("Ignore Raycast"); // Cambia la capa del objeto para ignorar futuros rayos
                 }
             }
@@ -61,6 +65,12 @@ public class MenuMover : IEstado
 
     public void Salir(MenuStateMachine menus)
     {
+
+        if (objetoSeleccionado != null)
+        {
+            LeanTween.scale(objetoSeleccionado, Vector3.one, 0.1f);
+            objetoSeleccionado.layer = LayerMask.NameToLayer("Default");
+        }
         menus.controlMenus.menuMover.SetActive(false);
     }
 }

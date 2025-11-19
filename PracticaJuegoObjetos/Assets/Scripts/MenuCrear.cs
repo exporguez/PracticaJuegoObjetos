@@ -11,7 +11,7 @@ public class MenuCrear : IEstado
     public void Entrar(MenuStateMachine menus)// Al entrar en el estado de crear edificio
     {
         menus.controlMenus.CerrarMenus();
-        menus.AnimarPopUps(menus.controlMenus.popUpCrear);
+        menus.AnimarEntradaPopUps(menus.controlMenus.popUpCrear);
         menus.controlMenus.menuCrear.SetActive(true);
         objetoCreado = null; // No hay ningún edificio creado al entrar
         //enMovimiento = false;

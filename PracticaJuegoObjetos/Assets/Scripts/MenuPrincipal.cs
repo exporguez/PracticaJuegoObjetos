@@ -9,6 +9,7 @@ public class MenuPrincipal : IEstado
     public void Entrar(MenuStateMachine menus)
     {
         menus.controlMenus.CerrarMenus();
+        menus.AnimarMenuPrincipal(menus.controlMenus.menuPrincipal);
         menus.controlMenus.menuPrincipal.SetActive(true);
     }
 

@@ -12,13 +12,14 @@ public class MenuStateMachine : MonoBehaviour
 
     private float duracionAnimacion = 0.5f;
     public LeanTweenType tipoEaseIn = LeanTweenType.easeOutBack;
+    public LeanTweenType tipoEaseOut = LeanTweenType.easeInBack;
 
     public GameObject particulas;
 
     // Estado actual del Menu
     private IEstado estadoAtualMenu;
-    private GameObject edificioSeleccionado;    
-    
+    private GameObject edificioSeleccionado;
+
     public void Start()
     {
         // Inicializa el estado del menú al menú principal
@@ -32,7 +33,7 @@ public class MenuStateMachine : MonoBehaviour
         if (estadoAtualMenu != null)// Si hay un estado actual, ejecuta su lógica
         {
             estadoAtualMenu.Ejecutar(this);// Ejecuta la lógica del estado actual
-        }        
+        }
     }
 
     public void CambiarEstado(IEstado nuevoEstado)
@@ -42,7 +43,7 @@ public class MenuStateMachine : MonoBehaviour
         {
             estadoAtualMenu.Salir(this);
         }
-        
+
         // Pasamos al nuevo estado
         estadoAtualMenu = nuevoEstado;
         // Entramos en el nuevo estado
@@ -53,7 +54,7 @@ public class MenuStateMachine : MonoBehaviour
     {
         CambiarEstado(new MenuPrincipal());
     }
-    
+
     public void IrMenuCrear()// Va al menú de crear
     {
         estadoAtualMenu = new MenuCrear();
@@ -64,7 +65,7 @@ public class MenuStateMachine : MonoBehaviour
     {
         CambiarEstado(new MenuMover());
     }
-    
+
     public void IrMenuRotar()// Va al menú de rotar
     {
         CambiarEstado(new MenuRotar());
@@ -77,20 +78,20 @@ public class MenuStateMachine : MonoBehaviour
 
     public void InstanciarParticulas(Vector3 posicion)// Instancia el efecto de partículas en la posición dada
     {
-        if(particulas != null)
+        if (particulas != null)
         {
             GameObject efecto = Instantiate(particulas, posicion, Quaternion.identity);
             ParticleSystem ps = efecto.GetComponent<ParticleSystem>();
-            
-            if(ps != null)
+
+            if (ps != null)
             {
                 Destroy(efecto, ps.main.duration + ps.main.startLifetime.constantMax);
             }
-            
+
         }
     }
-    
-    public void AnimarPopUps(GameObject popUp)
+
+    public void AnimarEntradaPopUps(GameObject popUp)
     {
         LeanTween.cancel(popUp);
         popUp.SetActive(true);
@@ -99,5 +100,29 @@ public class MenuStateMachine : MonoBehaviour
         LeanTween.scale(popUp, Vector3.one, duracionAnimacion).setEase(tipoEaseIn);
 
     }
+
+    public void AnimarSalidaPopUps (GameObject popUp)
+    {
+        LeanTween.cancel(popUp);
+        LeanTween.scale(popUp, Vector3.zero, duracionAnimacion).setEase(tipoEaseOut).setOnComplete(() =>
+        {
+            popUp.SetActive(false);
+        })
+        ;
+    }
+
+    public void AnimarMenuPrincipal(GameObject menuPrincipal)
+    {
+        LeanTween.cancel(menuPrincipal);// Cancela cualquier animación en curso
+        menuPrincipal.SetActive(true);// Asegura que el menú esté activo
+        Vector3 posicionFinal = menuPrincipal.transform.localPosition;// Guarda la posición final del menú
+        menuPrincipal.transform.localScale = Vector3.one;// Establece la escala inicial del menú
+        menuPrincipal.transform.localPosition = posicionFinal;// Establece la posición inicial del menú
+        menuPrincipal.transform.localScale = Vector3.zero;// Escala el menú a cero para la animación de entrada
+        LeanTween.moveLocal(menuPrincipal, posicionFinal, duracionAnimacion).setEase(tipoEaseIn);// Anima la posición del menú a la posición final
+        LeanTween.scale(menuPrincipal, Vector3.one, duracionAnimacion).setEase(tipoEaseIn);// Anima la escala del menú al tamaño original
+    }
+    
+        
 }
 

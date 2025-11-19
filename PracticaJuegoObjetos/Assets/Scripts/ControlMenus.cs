@@ -41,30 +41,30 @@ public class ControlMenus : MonoBehaviour
     private void Awake()
     {
         if (Instance != null && Instance != this)
-        {            
+        {
             Destroy(gameObject);
             return;
-        } 
+        }
         Instance = this;
     }
 
     public void Start() // Inicializa el menú principal al inicio
-    {        
+    {
 
         botonCrear.onClick.AddListener(() => menus.IrMenuCrear());// Asigna la funcion al botón Crear
         botonMover.onClick.AddListener(() => menus.IrMenuMover());// Asigna la funcion al botón Mover
         botonRotar.onClick.AddListener(() => menus.IrMenuRotar());// Asigna la funcion al botón Rotar
         botonEliminar.onClick.AddListener(() => menus.IrMenuEliminar());// Asigna la funcion al botón Eliminar
-        
+
         botonVolverCrear.onClick.AddListener(() => menus.VolverAlMenuPrincipal());// Asigna la funcion al botón Volver
         botonVolverMover.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
         botonVolverRotar.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
         botonVolverEliminar.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
 
-        botonCerrarPopUpCrear.onClick.AddListener(() => CerrarPopUps());// Asigna la funcion al botón Cerrar del pop-up Crear
-        botonCerrarPopUpMover.onClick.AddListener(() => CerrarPopUps());// Asigna la funcion al botón Cerrar del pop-up Mover
-        botonCerrarPopUpRotar.onClick.AddListener(() => CerrarPopUps());// Asigna la funcion al botón Cerrar del pop-up Rotar
-        botonCerrarPopUpEliminar.onClick.AddListener(() => CerrarPopUps());// Asigna la funcion al botón Cerrar del pop-up Eliminar
+        botonCerrarPopUpCrear.onClick.AddListener(() => CerrarPopUpCrear());// Asigna la funcion al botón Cerrar del pop-up Crear
+        botonCerrarPopUpMover.onClick.AddListener(() => CerrarPopUpMover());// Asigna la funcion al botón Cerrar del pop-up Mover
+        botonCerrarPopUpRotar.onClick.AddListener(() => CerrarPopUpRotar());// Asigna la funcion al botón Cerrar del pop-up Rotar
+        botonCerrarPopUpEliminar.onClick.AddListener(() => CerrarPopUpEliminar());// Asigna la funcion al botón Cerrar del pop-up Eliminar
 
         for (int i = 0; i < botonesPrefabs.Length; i++) // Asigna la funcion a los botones de objetos
         {
@@ -85,12 +85,25 @@ public class ControlMenus : MonoBehaviour
         menuEliminar.SetActive(false);
 
     }
-    public void CerrarPopUps() // Cierra todos los pop-ups
+    public void CerrarPopUpCrear() // Cierra todos los pop-ups
     {
-        popUpCrear.SetActive(false);
-        popUpMover.SetActive(false);
-        popUpRotar.SetActive(false);
-        popUpEliminar.SetActive(false);
+        menus.AnimarSalidaPopUps(popUpCrear);
+        
+    }
+    public void CerrarPopUpMover()
+    {
+        menus.AnimarSalidaPopUps(popUpMover);
+        
+    }
+    public void CerrarPopUpRotar()
+    {
+        menus.AnimarSalidaPopUps(popUpRotar);
+        
+    }
+    public void CerrarPopUpEliminar()
+    {
+        menus.AnimarSalidaPopUps(popUpEliminar);
+        
     }
 
 
@@ -107,7 +120,7 @@ public class ControlMenus : MonoBehaviour
         {
             return;
         }
-        
+
         GameObject prefabInstanciado = menus.controlMenus.prefabs[indiceObjeto];
         objetoCreado = Object.Instantiate(prefabInstanciado);
         objetoCreado.layer = LayerMask.NameToLayer("Editable"); // Cambia la capa del edificio para que sea editable
@@ -116,7 +129,7 @@ public class ControlMenus : MonoBehaviour
         Vector3 posicionInicial = new Vector3(0f, 2f, 77.5f); // Posición por defecto en caso de no encontrar el suelo
 
         if (suelo != null)
-        {            
+        {
             objetoCreado.transform.position = posicionInicial;
             objetoCreado.layer = LayerMask.NameToLayer("Default"); // Cambia la capa del edificio para que sea editable
         }

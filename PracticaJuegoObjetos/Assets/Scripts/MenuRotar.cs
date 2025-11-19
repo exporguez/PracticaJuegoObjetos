@@ -4,13 +4,16 @@ public class MenuRotar : IEstado
 {
     private GameObject objetoSeleccionado;
     private string tagEditable = "Editable";
-    private float velocidadRotacion = 500f;
+    private float velocidadRotacion = 1000f;
     private float distanciaMaxima = 300f;
+
+    private Vector3 escalaReducida = new Vector3(0.7f, 0.7f, 0.7f);// Escala reducida para el objeto seleccionado
+    private float duracionAnimacion = 0.2f;// Duración de la animación de reducción
 
     public void Entrar(MenuStateMachine menus)
     {
         menus.controlMenus.CerrarMenus();
-        menus.AnimarPopUps(menus.controlMenus.popUpRotar);
+        menus.AnimarEntradaPopUps(menus.controlMenus.popUpRotar);
         menus.controlMenus.menuRotar.SetActive(true);
         objetoSeleccionado = null;
 
@@ -28,7 +31,8 @@ public class MenuRotar : IEstado
             {     
                 if (hit.collider.CompareTag(tagEditable)) // Verifica si el objeto tiene la etiqueta "Editable"
                 {
-                    objetoSeleccionado = hit.collider.gameObject; // Obtiene el objeto seleccionado                                   
+                    objetoSeleccionado = hit.collider.gameObject; // Obtiene el objeto seleccionado
+                    LeanTween.scale(objetoSeleccionado, escalaReducida, duracionAnimacion).setEase(LeanTweenType.easeOutQuad);
                 }
             }
         }
@@ -40,6 +44,7 @@ public class MenuRotar : IEstado
 
             if (Input.GetMouseButtonDown(1))// Si se hace clic derecho
             {
+                LeanTween.scale(objetoSeleccionado, Vector3.one, duracionAnimacion).setEase(LeanTweenType.easeOutBack);
                 objetoSeleccionado = null; // Deselecciona el objeto al hacer clic izquierdo
             }
         }
