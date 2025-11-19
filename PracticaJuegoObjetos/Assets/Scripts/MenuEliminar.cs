@@ -10,6 +10,7 @@ public class MenuEliminar : IEstado
     public void Entrar(MenuStateMachine menus)
     {
         menus.controlMenus.CerrarMenus();
+        menus.AnimarPopUps(menus.controlMenus.popUpEliminar);
         menus.controlMenus.menuEliminar.SetActive(true);
         menus.capaDestruibleMask = LayerMask.GetMask("Default");
 

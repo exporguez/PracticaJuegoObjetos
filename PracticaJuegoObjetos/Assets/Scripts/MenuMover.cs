@@ -11,6 +11,7 @@ public class MenuMover : IEstado
     public void Entrar(MenuStateMachine menus)
     {
         menus.controlMenus.CerrarMenus();
+        menus.AnimarPopUps(menus.controlMenus.popUpMover);
         menus.controlMenus.menuMover.SetActive(true);
         objetoSeleccionado = null;// No hay ningún objeto seleccionado al entrar
     }
@@ -34,7 +35,9 @@ public class MenuMover : IEstado
             if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
             {
                 objetoSeleccionado.layer = LayerMask.NameToLayer("Default"); // Restaura la capa del objeto seleccionado
+                menus.InstanciarParticulas(objetoSeleccionado.transform.position); // Instancia partículas en la posición donde se colocó el objeto
                 objetoSeleccionado = null; // Deselecciona el objeto al hacer clic izquierdo
+                
             }
             return; // Sale del método para evitar seleccionar otro objeto mientras se mueve uno
         }

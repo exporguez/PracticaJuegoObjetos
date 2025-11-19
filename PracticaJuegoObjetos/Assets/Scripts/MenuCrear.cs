@@ -11,6 +11,7 @@ public class MenuCrear : IEstado
     public void Entrar(MenuStateMachine menus)// Al entrar en el estado de crear edificio
     {
         menus.controlMenus.CerrarMenus();
+        menus.AnimarPopUps(menus.controlMenus.popUpCrear);
         menus.controlMenus.menuCrear.SetActive(true);
         objetoCreado = null; // No hay ningún edificio creado al entrar
         //enMovimiento = false;
@@ -29,7 +30,7 @@ public class MenuCrear : IEstado
         {
             Vector3 nuevaPosicion = hit.point;// Obtiene la posición del punto de colisión
             nuevaPosicion.y += objetoCreado.transform.localScale.y / 2f; // Ajusta la posición Y para que el edificio quede sobre el suelo
-            objetoCreado.transform.position = nuevaPosicion;// Mueve el edificio a la nueva posición
+            objetoCreado.transform.position = hit.point;// Mueve el edificio a la nueva posición
             
         }
         

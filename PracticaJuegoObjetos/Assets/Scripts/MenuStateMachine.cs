@@ -10,6 +10,11 @@ public class MenuStateMachine : MonoBehaviour
     public LayerMask editableMask;
     public LayerMask capaDestruibleMask;
 
+    private float duracionAnimacion = 0.5f;
+    public LeanTweenType tipoEaseIn = LeanTweenType.easeOutBack;
+
+    public GameObject particulas;
+
     // Estado actual del Menu
     private IEstado estadoAtualMenu;
     private GameObject edificioSeleccionado;    
@@ -70,6 +75,29 @@ public class MenuStateMachine : MonoBehaviour
         CambiarEstado(new MenuEliminar());
     }
 
+    public void InstanciarParticulas(Vector3 posicion)// Instancia el efecto de partículas en la posición dada
+    {
+        if(particulas != null)
+        {
+            GameObject efecto = Instantiate(particulas, posicion, Quaternion.identity);
+            ParticleSystem ps = efecto.GetComponent<ParticleSystem>();
+            
+            if(ps != null)
+            {
+                Destroy(efecto, ps.main.duration + ps.main.startLifetime.constantMax);
+            }
+            
+        }
+    }
     
+    public void AnimarPopUps(GameObject popUp)
+    {
+        LeanTween.cancel(popUp);
+        popUp.SetActive(true);
+        popUp.transform.localScale = Vector3.one;
+        popUp.transform.localScale = Vector3.zero;
+        LeanTween.scale(popUp, Vector3.one, duracionAnimacion).setEase(tipoEaseIn);
+
+    }
 }
 

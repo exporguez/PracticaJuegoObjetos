@@ -10,6 +10,7 @@ public class MenuRotar : IEstado
     public void Entrar(MenuStateMachine menus)
     {
         menus.controlMenus.CerrarMenus();
+        menus.AnimarPopUps(menus.controlMenus.popUpRotar);
         menus.controlMenus.menuRotar.SetActive(true);
         objetoSeleccionado = null;
 

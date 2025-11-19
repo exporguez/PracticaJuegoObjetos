@@ -13,6 +13,16 @@ public class ControlMenus : MonoBehaviour
     public GameObject menuRotar;
     public GameObject menuEliminar;
 
+    public GameObject popUpCrear;
+    public GameObject popUpMover;
+    public GameObject popUpRotar;
+    public GameObject popUpEliminar;
+
+    public Button botonCerrarPopUpCrear;
+    public Button botonCerrarPopUpMover;
+    public Button botonCerrarPopUpRotar;
+    public Button botonCerrarPopUpEliminar;
+
     public GameObject[] prefabs;
     public Button[] botonesPrefabs;
     private GameObject objetoCreado;
@@ -51,6 +61,11 @@ public class ControlMenus : MonoBehaviour
         botonVolverRotar.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
         botonVolverEliminar.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
 
+        botonCerrarPopUpCrear.onClick.AddListener(() => CerrarPopUps());// Asigna la funcion al botón Cerrar del pop-up Crear
+        botonCerrarPopUpMover.onClick.AddListener(() => CerrarPopUps());// Asigna la funcion al botón Cerrar del pop-up Mover
+        botonCerrarPopUpRotar.onClick.AddListener(() => CerrarPopUps());// Asigna la funcion al botón Cerrar del pop-up Rotar
+        botonCerrarPopUpEliminar.onClick.AddListener(() => CerrarPopUps());// Asigna la funcion al botón Cerrar del pop-up Eliminar
+
         for (int i = 0; i < botonesPrefabs.Length; i++) // Asigna la funcion a los botones de objetos
         {
             int index = i; // Necesario para evitar el problema de cierre
@@ -68,8 +83,17 @@ public class ControlMenus : MonoBehaviour
         menuMover.SetActive(false);
         menuRotar.SetActive(false);
         menuEliminar.SetActive(false);
-        
+
     }
+    public void CerrarPopUps() // Cierra todos los pop-ups
+    {
+        popUpCrear.SetActive(false);
+        popUpMover.SetActive(false);
+        popUpRotar.SetActive(false);
+        popUpEliminar.SetActive(false);
+    }
+
+
     public void CrearObjeto(int indiceObjeto)
     {
         if (objetoCreado != null)
