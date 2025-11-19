@@ -43,16 +43,16 @@ public class MenuEscalar : IEstado
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))// Si se hace clic izquierdo
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             
             if (Physics.Raycast(ray, out hit, distanciaMaxima))
             {
-                if (hit.collider.CompareTag(tagEditable))
+                if (hit.collider.CompareTag(tagEditable))// Verifica si el objeto tiene la etiqueta "Editable"
                 {
-                    objetoSeleccionado = hit.collider.gameObject;
+                    objetoSeleccionado = hit.collider.gameObject;// Selecciona el objeto
                 }
             }
         }
