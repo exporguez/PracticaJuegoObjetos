@@ -67,8 +67,10 @@ public class MenuStateMachine : MonoBehaviour
     public void IrMenuCrear()// Va al menú de crear
     {
 
-        estadoAtualMenu = new MenuCrear();
-        estadoAtualMenu.Entrar(this);
+        /*estadoAtualMenu = new MenuCrear();
+        estadoAtualMenu.Entrar(this);*/
+
+        CambiarEstado(new MenuCrear());
     }
 
     public void IrMenuMover()// Va al menú de mover
@@ -145,11 +147,12 @@ public class MenuStateMachine : MonoBehaviour
         LeanTween.cancel(menuPopUpCrear);// Cancela cualquier animación en curso
         if (menuPopUpCrear == controlMenus.menuLateralCrear) // Asumimos que es el menú de creación
         {
-            Vector3 posicionFinal = menuPopUpCrear.transform.localPosition;
-            Vector3 posicionSalida = posicionFinal;
-            posicionSalida.x -= posicionLateral;
+            Vector3 posicionVisible = menuPopUpCrear.transform.localPosition;
+            Vector3 posicionSalida = (Vector3)posicionVisible;
+            posicionSalida.x += posicionLateral;
             LeanTween.moveLocal(menuPopUpCrear, posicionSalida, duracionAnimacion).setEase(tipoEaseOut).setOnComplete(() =>
             {
+                menuPopUpCrear.transform.localPosition = (Vector3)posicionVisible;
                 menuPopUpCrear.SetActive(false);
             });
         }

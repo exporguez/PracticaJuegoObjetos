@@ -16,6 +16,7 @@ public class MenuCrear : IEstado
         menus.AnimarEntradaPopUps(menus.controlMenus.popUpCrear);
         menus.AnimarEntradaMenuCrear(menus.controlMenus.menuLateralCrear);
         menus.controlMenus.menuCrear.SetActive(true);
+        menus.controlMenus.menuLateralCrear.SetActive(true);
         objetoCreado = null; // No hay ningún edificio creado al entrar
        
         
@@ -59,6 +60,7 @@ public class MenuCrear : IEstado
         }
         
         menus.controlMenus.menuCrear.SetActive(false);
+        menus.controlMenus.menuLateralCrear.SetActive(false);
     }
 
     

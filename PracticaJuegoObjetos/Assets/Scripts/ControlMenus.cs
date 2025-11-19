@@ -116,7 +116,7 @@ public class ControlMenus : MonoBehaviour
     
     public void CerrarPopUpMenuLateral()
     {
-        menus.AnimarSalidaMenuCrear(menuCrear);
+        menus.AnimarSalidaMenuCrear(menuLateralCrear);
     }    
 
     public void CrearObjeto(int indiceObjeto)
