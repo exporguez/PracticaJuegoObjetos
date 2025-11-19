@@ -20,13 +20,19 @@ public class ControlMenus : MonoBehaviour
     public GameObject popUpRotar;
     public GameObject popUpEliminar;
     public GameObject menuLateralCrear;
+    public GameObject menuLateralRotar;
+    public GameObject popUpConfirmarEliminar;
 
     public Button botonCerrarPopUpCrear;
     public Button botonCerrarPopUpMover;
     public Button botonCerrarPopUpRotar;
     public Button botonCerrarPopUpEliminar;
 
+    public Button botonConfirmarEliminar;
+    public Button botonCancelarEliminar;
+
     public Button botonCerrarMenuLateral;
+    public Button botonCerrarMenuLateralRotar;
 
     public GameObject[] prefabs;
     public Button[] botonesPrefabs;
@@ -43,6 +49,7 @@ public class ControlMenus : MonoBehaviour
     public Button botonVolverRotar;
     public Button botonVolverEliminar;
 
+    //public GameObject objetoSeleccionadoParaEliminar;
 
     private void Awake()
     {
@@ -71,8 +78,12 @@ public class ControlMenus : MonoBehaviour
         botonCerrarPopUpMover.onClick.AddListener(() => CerrarPopUpMover());// Asigna la funcion al botón Cerrar del pop-up Mover
         botonCerrarPopUpRotar.onClick.AddListener(() => CerrarPopUpRotar());// Asigna la funcion al botón Cerrar del pop-up Rotar
         botonCerrarPopUpEliminar.onClick.AddListener(() => CerrarPopUpEliminar());// Asigna la funcion al botón Cerrar del pop-up Eliminar
+        botonCerrarMenuLateralRotar.onClick.AddListener(() => CerrarPopUpLateralRotar());
 
         botonCerrarMenuLateral.onClick.AddListener(() => CerrarPopUpMenuLateral());// Asigna la funcion al botón Cerrar del menú lateral
+        
+        //botonConfirmarEliminar.onClick.AddListener(() => ConfirmarEliminar());// Asigna la funcion al botón Confirmar Eliminar
+        //botonCancelarEliminar.onClick.AddListener(() => CancelarEliminar());// Asigna la funcion al botón Cancelar Eliminar
 
         for (int i = 0; i < botonesPrefabs.Length; i++) // Asigna la funcion a los botones de objetos
         {
@@ -107,6 +118,11 @@ public class ControlMenus : MonoBehaviour
     {
         menus.AnimarSalidaPopUps(popUpRotar);
         
+    }
+    public void CerrarPopUpLateralRotar()
+    {
+        menus.AnimarSalidaPopUps(menuLateralRotar);
+
     }
     public void CerrarPopUpEliminar()
     {
@@ -144,4 +160,20 @@ public class ControlMenus : MonoBehaviour
         }
     }
 
+    /*public void ConfirmarEliminar()
+    {
+        if (objetoSeleccionadoParaEliminar != null)
+        {
+            //linea de sonido de eliminacion
+            Object.Destroy(objetoSeleccionadoParaEliminar); // Destrucción REAL
+            objetoSeleccionadoParaEliminar = null;          // Limpiar referencia
+        }        
+        
+        menus.AnimarSalidaPopUps(popUpConfirmarEliminar);
+    }
+    public void CancelarEliminar()
+    {
+        objetoSeleccionadoParaEliminar = null; // Limpiar referencia
+        menus.AnimarSalidaPopUps(popUpConfirmarEliminar);
+    }*/
 }

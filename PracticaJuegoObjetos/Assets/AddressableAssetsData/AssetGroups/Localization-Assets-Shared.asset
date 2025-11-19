@@ -14,8 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Localization-Assets-Shared
   m_GUID: 2e5209ceaa0a4894ca89529240bb3ddc
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 9a955fb867d255348a7eb7983376a2a5
+    m_Address: Assets/Localization/Popups_Text Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 33746d2a6e0ab344dabc720a66732e32, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: 076e068e78135e64aa1d90de03ec6e83, type: 2}
+    - {fileID: 11400000, guid: 51893e94dc577dd42997dc905adbdbce, type: 2}

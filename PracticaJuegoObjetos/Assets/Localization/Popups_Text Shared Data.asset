@@ -13,8 +13,36 @@ MonoBehaviour:
   m_Name: Popups_Text Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: Popups_Text
-  m_TableCollectionNameGuidString: 00000000000000000000000000000000
-  m_Entries: []
+  m_TableCollectionNameGuidString: 9a955fb867d255348a7eb7983376a2a5
+  m_Entries:
+  - m_Id: 809150455808
+    m_Key: _creation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1202739748864
+    m_Key: _move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1397913296896
+    m_Key: _rotate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1539282313216
+    m_Key: _delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15484374228992
+    m_Key: _instruction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19604195778560
+    m_Key: _destruction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19725465690112
+    m_Key: _cancel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

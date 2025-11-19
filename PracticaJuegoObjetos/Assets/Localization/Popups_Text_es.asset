@@ -17,7 +17,35 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 9a955fb867d255348a7eb7983376a2a5, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 809150455808
+    m_Localized: Haz click en el objeto que quieras crear.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1202739748864
+    m_Localized: Haz click en el objeto que quieras mover.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1397913296896
+    m_Localized: Haz click en el objeto que quieras rotar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1539282313216
+    m_Localized: Haz click en el objeto que quieras eliminar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15484374228992
+    m_Localized: "Mueve el rat\xF3n hacia la derecha o izquierda para rotar el objeto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19604195778560
+    m_Localized: Eliminar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19725465690112
+    m_Localized: Cancelar
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

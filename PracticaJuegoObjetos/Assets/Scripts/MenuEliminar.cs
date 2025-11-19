@@ -8,6 +8,8 @@ public class MenuEliminar : IEstado
 
     private float duracionAnimacion = 0.2f;// Duración de la animación de reducción
 
+    private string tagEditable = "Editable";// Etiqueta para los objetos que se pueden eliminar
+
     public void Entrar(MenuStateMachine menus)
     {
         menus.controlMenus.CerrarMenus();
@@ -36,6 +38,27 @@ public class MenuEliminar : IEstado
 
             }
         }
+        /*if (Camera.main == null) return;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Physics.Raycast(ray, out hit, distanciaMaxima))
+            {
+                if (hit.collider.CompareTag(tagEditable))
+                {
+                    GameObject objetoSeleccionado = hit.collider.gameObject;
+
+                    
+                    menus.controlMenus.objetoSeleccionadoParaEliminar = objetoSeleccionado;
+
+                   
+                    menus.AnimarEntradaPopUps(menus.controlMenus.popUpConfirmarEliminar);
+                   
+                    return;
+                }
+            }
+        }*/
     }
 
     public void Salir(MenuStateMachine menus)
