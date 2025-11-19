@@ -28,6 +28,7 @@ public class MenuMover : IEstado
 
             if (Physics.Raycast(ray, out hit, distanciaMaxima, sueloMask)) // Si el rayo colisiona con un objeto editable
             {
+                
                 menus.MoverSombra(hit.point);
                 Vector3 nuevaPosicion = hit.point; // Obtiene la posición del punto de colisión
                 nuevaPosicion.y += objetoSeleccionado.transform.localScale.y / 2f; // Ajusta la posición Y para que el objeto quede sobre el suelo
@@ -36,11 +37,13 @@ public class MenuMover : IEstado
 
             if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
             {
+                menus.ReproducirSonidoSoltar();
+                menus.InstanciarParticulas(objetoSeleccionado.transform.position); // Instancia partículas en la posición donde se colocó el objeto
                 menus.DestruirSombra();
                 LeanTween.scale(objetoSeleccionado, Vector3.one, duracionAnimacion).setEase(LeanTweenType.easeOutBack); // Anima la escala del objeto de vuelta a su tamaño original
 
                 objetoSeleccionado.layer = LayerMask.NameToLayer("Default"); // Restaura la capa del objeto seleccionado
-                menus.InstanciarParticulas(objetoSeleccionado.transform.position); // Instancia partículas en la posición donde se colocó el objeto
+                
                 objetoSeleccionado = null; // Deselecciona el objeto al hacer clic izquierdo
                 
             }

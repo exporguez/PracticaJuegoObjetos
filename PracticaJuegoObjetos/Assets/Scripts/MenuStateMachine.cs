@@ -22,6 +22,9 @@ public class MenuStateMachine : MonoBehaviour
     public GameObject sombraInstanciada;
     public float tamañoSombra = 1.3f;
 
+    public AudioSource audioConstruccion;
+    public AudioClip audioSoltarObjeto;
+
     // Estado actual del Menu
     private IEstado estadoAtualMenu;
     private GameObject edificioSeleccionado;
@@ -88,12 +91,7 @@ public class MenuStateMachine : MonoBehaviour
         if (particulas != null)
         {
             GameObject efecto = Instantiate(particulas, posicion, Quaternion.identity);
-            ParticleSystem ps = efecto.GetComponent<ParticleSystem>();
-
-            if (ps != null)
-            {
-                Destroy(efecto, ps.main.duration + ps.main.startLifetime.constantMax);
-            }
+   
         }
     }
 
@@ -182,6 +180,14 @@ public class MenuStateMachine : MonoBehaviour
         {
             Destroy(sombraInstanciada);
             sombraInstanciada = null;
+        }
+    }
+
+    public void ReproducirSonidoSoltar()
+    {
+        if (audioConstruccion != null && audioSoltarObjeto != null)
+        {
+            audioConstruccion.PlayOneShot(audioSoltarObjeto);
         }
     }
 }

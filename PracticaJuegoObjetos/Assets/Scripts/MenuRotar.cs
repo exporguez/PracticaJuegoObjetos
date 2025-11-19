@@ -44,6 +44,7 @@ public class MenuRotar : IEstado
 
             if (Input.GetMouseButtonDown(1))// Si se hace clic derecho
             {
+                menus.ReproducirSonidoSoltar();
                 LeanTween.scale(objetoSeleccionado, Vector3.one, duracionAnimacion).setEase(LeanTweenType.easeOutBack);
                 objetoSeleccionado = null; // Deselecciona el objeto al hacer clic izquierdo
             }
