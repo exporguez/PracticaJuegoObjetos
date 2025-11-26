@@ -38,8 +38,6 @@ public class MenuCrear : IEstado
 
         }
 
-
-
         if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
         {
             objetoCreado = null; // Confirma la colocación del edificio y deja de moverlo
@@ -49,39 +47,7 @@ public class MenuCrear : IEstado
             Object.Destroy(objetoCreado); // Destruye el edificio creado
             objetoCreado = null; // No hay ningún edificio creado
 
-        }
-        /*if (objetoCreado == null || Camera.main == null) return;// Si no hay un objeto creado o no hay una cámara principal, no hacer nada
-        Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);// Crea un rayo desde la cámara hacia la posición del ratón
-        Debug.DrawRay(myRay.origin, myRay.direction * distanciaMaxima, Color.red, 0.1f);
-        RaycastHit hit;// Variable para almacenar la información del punto de colisión
-
-        if (Physics.Raycast(myRay, out hit, distanciaMaxima, menus.sueloMask))
-        {
-            menus.MoverSombra(hit.point);
-            Vector3 nuevaPosicion = hit.point;
-
-            Collider col = objetoCreado.GetComponent<Collider>();
-            if (col != null)
-            {
-                nuevaPosicion.y += col.bounds.extents.y; // Ajusta la posición en Y para que el objeto no se hunda en el suelo
-            }
-            else
-            {
-                nuevaPosicion.y += 0.5f; // Ajuste por defecto si no hay collider
-            }
-
-            objetoCreado.transform.position = nuevaPosicion; // Mueve el edificio a la nueva posición
-            
-        }
-
-        if(Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
-        {
-            menus.ReproducirSonidoSoltar();
-            menus.InstanciarParticulas(objetoCreado.transform.position);
-            objetoCreado.layer = LayerMask.NameToLayer("Default");
-            objetoCreado = null; // El objeto ya no está en movimiento
-            menus.DestruirSombra();            
-        }*/
+        }       
 
     }
 

@@ -88,6 +88,17 @@ public class MenuStateMachine : MonoBehaviour
         CambiarEstado(new MenuEliminar());
     }
 
+    public void IrMenuColor()
+    {
+        CambiarEstado(new MenuColor());
+    }
+
+    public void IrMenuEscalar()
+    {
+        CambiarEstado(new MenuEscalar());
+    }
+
+
     public void InstanciarParticulas(Vector3 posicion)// Instancia el efecto de partículas en la posición dada
     {
         if (particulas != null)

@@ -46,6 +46,19 @@ MonoBehaviour:
     m_Localized: Cancelar
     m_Metadata:
       m_Items: []
+  - m_Id: 158475488956416
+    m_Localized: Haz click en el color que quieras usar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 168514487836672
+    m_Localized: Haz click en el objeto que quieras escalar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 168651285061632
+    m_Localized: "Mueve el rat\xF3n arriba o abajo para escalar el objeto. Usa el
+      click derecho para confirmar."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

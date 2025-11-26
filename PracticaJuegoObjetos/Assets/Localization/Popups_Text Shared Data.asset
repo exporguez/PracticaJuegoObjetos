@@ -43,6 +43,18 @@ MonoBehaviour:
     m_Key: _cancel
     m_Metadata:
       m_Items: []
+  - m_Id: 158475488956416
+    m_Key: _color
+    m_Metadata:
+      m_Items: []
+  - m_Id: 168514487836672
+    m_Key: _scale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 168651285061632
+    m_Key: _increment
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

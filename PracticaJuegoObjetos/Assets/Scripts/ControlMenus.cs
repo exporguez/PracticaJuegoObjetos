@@ -7,13 +7,14 @@ public class ControlMenus : MonoBehaviour
     public MenuCrear menuCrearScript;
 
     public MenuStateMachine menus;
+
     public GameObject menuPrincipal;
     public GameObject menuCrear;
     public GameObject menuMover;
     public GameObject menuRotar;
     public GameObject menuEliminar;
     public GameObject menuEscalar;
-
+    public GameObject menuColor;
     
     public GameObject popUpCrear;
     public GameObject popUpMover;
@@ -22,11 +23,19 @@ public class ControlMenus : MonoBehaviour
     public GameObject menuLateralCrear;
     public GameObject menuLateralRotar;
     public GameObject popUpConfirmarEliminar;
+    public GameObject popUpColor;
+    public GameObject popUpEscalar;
+    public GameObject popUpLateralColor;
+    public GameObject popUpLateralEscalar;
 
     public Button botonCerrarPopUpCrear;
     public Button botonCerrarPopUpMover;
     public Button botonCerrarPopUpRotar;
     public Button botonCerrarPopUpEliminar;
+    public Button botonCerrarPopUpColor;
+    public Button botonCerrarPopUpEscalar;
+    public Button botonCerrarPopUpLateralColor;
+    public Button botonCerrarPopUpLateralEscalar;
 
     public Button botonConfirmarEliminar;
     public Button botonCancelarEliminar;
@@ -43,11 +52,21 @@ public class ControlMenus : MonoBehaviour
     public Button botonRotar;
     public Button botonEliminar;
     public Button botonEscalar;
+    public Button botonColor;
 
     public Button botonVolverCrear;
     public Button botonVolverMover;
     public Button botonVolverRotar;
     public Button botonVolverEliminar;
+    public Button botonVolverColor;
+    public Button botonVolverEscalar;
+
+    public Button[] botonesColores;
+    public Material[] materiales;
+    private GameObject objetoSeleccionado;
+    private Material materialSeleccionado;
+
+
 
     //public GameObject objetoSeleccionadoParaEliminar;
 
@@ -68,20 +87,34 @@ public class ControlMenus : MonoBehaviour
         botonMover.onClick.AddListener(() => menus.IrMenuMover());// Asigna la funcion al botón Mover
         botonRotar.onClick.AddListener(() => menus.IrMenuRotar());// Asigna la funcion al botón Rotar
         botonEliminar.onClick.AddListener(() => menus.IrMenuEliminar());// Asigna la funcion al botón Eliminar
+        botonColor.onClick.AddListener(() => menus.IrMenuColor());
+        botonEscalar.onClick.AddListener(() => menus.IrMenuEscalar());
 
         botonVolverCrear.onClick.AddListener(() => menus.VolverAlMenuPrincipal());// Asigna la funcion al botón Volver
         botonVolverMover.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
         botonVolverRotar.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
         botonVolverEliminar.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
+        botonVolverColor.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
+        botonVolverEscalar.onClick.AddListener(() => menus.VolverAlMenuPrincipal());
 
         botonCerrarPopUpCrear.onClick.AddListener(() => CerrarPopUpCrear());// Asigna la funcion al botón Cerrar del pop-up Crear
         botonCerrarPopUpMover.onClick.AddListener(() => CerrarPopUpMover());// Asigna la funcion al botón Cerrar del pop-up Mover
         botonCerrarPopUpRotar.onClick.AddListener(() => CerrarPopUpRotar());// Asigna la funcion al botón Cerrar del pop-up Rotar
         botonCerrarPopUpEliminar.onClick.AddListener(() => CerrarPopUpEliminar());// Asigna la funcion al botón Cerrar del pop-up Eliminar
         botonCerrarMenuLateralRotar.onClick.AddListener(() => CerrarPopUpLateralRotar());
+        botonCerrarPopUpColor.onClick.AddListener(() => CerrarPopUpColor());
+        botonCerrarPopUpLateralColor.onClick.AddListener(() => CerrarPopUpLateralColor());
+        botonCerrarPopUpEscalar.onClick.AddListener(() => CerrarPopUpEscalar());
+        botonCerrarPopUpLateralEscalar.onClick.AddListener(() => CerrarPopUpLateralEscalar());
 
         botonCerrarMenuLateral.onClick.AddListener(() => CerrarPopUpMenuLateral());// Asigna la funcion al botón Cerrar del menú lateral
-        
+
+        /*for (int i = 0; i < botonesColores.Length; i++) // Asigna la funcion a los botones de objetos
+        {
+            int index = i; // Necesario para evitar el problema de cierre
+            botonesColores[i].onClick.AddListener(() => CambiarColor());
+        }*/
+
         //botonConfirmarEliminar.onClick.AddListener(() => ConfirmarEliminar());// Asigna la funcion al botón Confirmar Eliminar
         //botonCancelarEliminar.onClick.AddListener(() => CancelarEliminar());// Asigna la funcion al botón Cancelar Eliminar
 
@@ -102,6 +135,8 @@ public class ControlMenus : MonoBehaviour
         menuMover.SetActive(false);
         menuRotar.SetActive(false);
         menuEliminar.SetActive(false);
+        menuColor.SetActive(false);
+        menuEscalar.SetActive(false);
 
     }
     public void CerrarPopUpCrear() // Cierra todos los pop-ups
@@ -135,6 +170,26 @@ public class ControlMenus : MonoBehaviour
         menus.AnimarSalidaMenuCrear(menuLateralCrear);
     }    
 
+    public void CerrarPopUpColor()
+    {
+        menus.AnimarSalidaPopUps(popUpColor);
+    }
+
+    public void CerrarPopUpLateralColor()
+    {
+        menus.AnimarSalidaPopUps(popUpLateralColor);
+    }
+
+    public void CerrarPopUpEscalar()
+    {
+        menus.AnimarSalidaPopUps(popUpEscalar);
+    }
+
+    public void CerrarPopUpLateralEscalar()
+    {
+        menus.AnimarSalidaPopUps(popUpLateralEscalar);
+    }
+
     public void CrearObjeto(int indiceObjeto)
     {
         
@@ -160,6 +215,22 @@ public class ControlMenus : MonoBehaviour
         }
     }
 
+    /*public void CambiarColor(int indiceColor)
+    {
+        if (Camera.main == null) return;
+
+        if (indiceColor < 0 || indiceColor >= materiales.Length)
+        {
+            return;
+        }
+
+        Material nuevo_material = materiales[indiceColor];
+
+        objetoSeleccionado.GetComponent<MeshRenderer>().material = nuevo_material;
+
+        if (nuevo_material == null) return;
+    }*/
+
     /*public void ConfirmarEliminar()
     {
         if (objetoSeleccionadoParaEliminar != null)
@@ -171,6 +242,7 @@ public class ControlMenus : MonoBehaviour
         
         menus.AnimarSalidaPopUps(popUpConfirmarEliminar);
     }
+    
     public void CancelarEliminar()
     {
         objetoSeleccionadoParaEliminar = null; // Limpiar referencia

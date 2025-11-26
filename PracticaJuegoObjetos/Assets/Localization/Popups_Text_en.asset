@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 15484374228992
-    m_Localized: Move the mouse left or right to rotate the object.
+    m_Localized: Move your mouse left or right to rotate the object.
     m_Metadata:
       m_Items: []
   - m_Id: 19604195778560
@@ -44,6 +44,19 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 19725465690112
     m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 158475488956416
+    m_Localized: Click on the colour you want to use.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 168514487836672
+    m_Localized: Click on the object you want to scale.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 168651285061632
+    m_Localized: Move your mouse up or down to scale the object. Use the right click
+      to confirm.
     m_Metadata:
       m_Items: []
   references:
